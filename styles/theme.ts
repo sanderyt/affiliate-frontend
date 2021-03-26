@@ -1,12 +1,38 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-export const customTheme = createMuiTheme({
+export const theme = {
+  palette: {
+    primary: "#34ace0",
+    secondary: "#227093"
+  },
+  margins: {
+    xs: "4px",
+    s: "8px",
+    m: "16px",
+    l: "32px",
+    xl: " 64px",
+    xxl: "128px"
+  },
+  paddings: {
+    margins: {
+      xs: "4px",
+      s: "8px",
+      m: "16px",
+      l: "32px",
+      xl: " 64px",
+      xxl: "128px"
+    }
+  },
+  boxShadow: "0 0 10px #aaa"
+};
+
+export const muiTheme = createMuiTheme({
   palette: {
     primary: {
-      main: "#34ace0"
+      main: theme.palette.primary
     },
     secondary: {
-      main: "#227093"
+      main: theme.palette.secondary
     }
   }
 });
