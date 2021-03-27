@@ -16,15 +16,15 @@ export const GlobalStyle = createGlobalStyle`
   
   body,
   html,
-  button,
   ul,
   li,
   input,
   textarea {
     font-family: "Gordita", "sans-serif" !important;
+    font-size: 1.1rem;
   }
   
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3, h4, h5, h6, button {
     font-family: "Circular", "sans-serif"
   }
 
