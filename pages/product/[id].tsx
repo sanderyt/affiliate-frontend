@@ -54,7 +54,7 @@ const Product: FC<Props> = ({
 
 export default Product;
 
-export const getServerSideProps: GetServerSideProps = async context => {
+export const getServerSideProps: GetServerSideProps = async () => {
   //Fetch local JSON file here with product data
 
   return {
