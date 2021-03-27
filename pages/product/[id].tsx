@@ -1,22 +1,52 @@
 import React, { FC } from "react";
 import { GetServerSideProps } from "next";
+
 import Layout from "../../components/Layout";
-import { Container } from "@material-ui/core";
+import { Container, Grid, Box } from "@material-ui/core";
+import { Button } from "../../components/Button";
+import { LocalOffer } from "@material-ui/icons";
 
 interface Props {
   name: string;
   images: string[];
+  description: string;
+  properties: any;
+  price: any;
 }
 
-const Product: FC<Props> = ({ name, images }) => {
+const Product: FC<Props> = ({
+  name,
+  images,
+  description,
+  properties,
+  price
+}) => {
   return (
     <Layout>
       <Container fixed>
         <h1>{name}</h1>
-        {images &&
-          images.map(image => {
-            return <img src={image} key={image} />;
-          })}
+        <Grid container>
+          <Grid item md={6}>
+            {images &&
+              images.map(image => {
+                return <img src={image} key={image} />;
+              })}
+          </Grid>
+          <Grid item md={6}>
+            <h3>{properties.fromPrice[0]}</h3>
+            <h3>{price.amount}</h3>
+            <h3>Omschrijving</h3>
+            <p>{description}</p>
+            <Box display="flex" flexDirection="column">
+              <span>{properties.deliveryTime[0]}</span>
+              <span>{properties.deliveryCosts[0]}</span>
+              <Button color="secondary">
+                <LocalOffer />
+                Bestel met korting
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </Container>
     </Layout>
   );
@@ -36,7 +66,8 @@ export const getServerSideProps: GetServerSideProps = async context => {
       URL:
         "https://tc.tradetracker.net/?c=18985&m=1447511&a=252069&u=https%3A%2F%2Fwww.leenbakker.nl%2Fbanken-en-stoelen%2Fstoelen%2Feetkamerstoelen%2Feetkamerstoel-senja-kunststof-groen-naturel-hout",
       images: ["https://static.leenbakker.nl/products/380x380/10302720.jpg"],
-      description: null,
+      description:
+        "Eetkamerstoel Senja is bekleed met kunststof in de kleur groen en heeft een onderstel van naturel hout. Eetkamerstoel Senja heeft een moderne look. Deze trendy kuipstoel wordt gekenmerkt door eenvoudige maar praktische vormgeving. Deze kuipstoel heeft alles wat je van een modern stoeltje mag verwachten. Stevige houten poten met een industriële look en een kunstsof kuipje met een fijn zitcomfort.",
       categories: { "Banken & Stoelen": "Banken & Stoelen" },
       properties: {
         brand: ["Leen Bakker"],

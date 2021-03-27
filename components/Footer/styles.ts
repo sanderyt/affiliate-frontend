@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
-  background-color: ${({ theme }) => theme.palette.primary};
+  background-color: ${({ theme }) => theme.palette.layout.footer};
   margin-top: ${({ theme }) => theme.margins.xl};
   color: white;
 `;
