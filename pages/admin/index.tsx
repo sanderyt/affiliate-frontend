@@ -1,5 +1,7 @@
 import React from "react";
-import { Grid } from "@material-ui/core";
+import CSVReader from "react-csv-reader";
+
+import { Grid, Box } from "@material-ui/core";
 import { Sidebar } from "../../components/Sidebar";
 
 const Index = () => {
@@ -9,7 +11,11 @@ const Index = () => {
         <Sidebar />
       </Grid>
       <Grid item md={10} xs={12}>
-        Content
+        <Box display="flex" alignItems="center" justifyContent="center">
+          <CSVReader
+            onFileLoaded={(data, fileInfo) => console.dir(data, fileInfo)}
+          />
+        </Box>
       </Grid>
     </Grid>
   );
