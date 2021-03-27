@@ -6,6 +6,8 @@ import { Container, Grid, Box } from "@material-ui/core";
 import { Button } from "../../components/Button";
 import { LocalOffer } from "@material-ui/icons";
 
+import { FromPrice, Price } from "./styles";
+
 interface Props {
   name: string;
   images: string[];
@@ -33,8 +35,10 @@ const Product: FC<Props> = ({
               })}
           </Grid>
           <Grid item md={6}>
-            <h3>{properties.fromPrice[0]}</h3>
-            <h3>{price.amount}</h3>
+            <Box display="flex">
+              <FromPrice>{`€${properties.fromPrice[0]}`}</FromPrice>
+              <Price>{`€${price.amount}`}</Price>
+            </Box>
             <h3>Omschrijving</h3>
             <p>{description}</p>
             <Box display="flex" flexDirection="column">
@@ -42,7 +46,7 @@ const Product: FC<Props> = ({
               <span>{properties.deliveryCosts[0]}</span>
               <Button color="secondary">
                 <LocalOffer />
-                Bestel met korting
+                {`Bestel met €${properties.discount[0]} korting`}
               </Button>
             </Box>
           </Grid>

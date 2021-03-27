@@ -7,13 +7,15 @@ import { GlobalStyle } from "../styles/globalStyle";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <MuiThemeProvider theme={muiTheme}>
+    <>
+      <GlobalStyle />
       <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <CssBaseline />
-        <Component {...pageProps} />
+        <MuiThemeProvider theme={muiTheme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </MuiThemeProvider>
       </ThemeProvider>
-    </MuiThemeProvider>
+    </>
   );
 }
 

@@ -4,6 +4,7 @@ export const theme = {
   palette: {
     primary: "#3498db",
     secondary: "#2ecc71",
+    error: "#e74c3c",
     grey: {
       veryDark: "#20232a",
       dark: "#20232a"
