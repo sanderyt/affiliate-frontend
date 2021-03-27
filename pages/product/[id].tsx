@@ -4,9 +4,9 @@ import { GetServerSideProps } from "next";
 import Layout from "../../components/Layout";
 import { Container, Grid, Box } from "@material-ui/core";
 import { Button } from "../../components/Button";
-import { LocalOffer } from "@material-ui/icons";
+import { LocalOffer, LocalShipping } from "@material-ui/icons";
 
-import { FromPrice, Price } from "./styles";
+import { FromPrice, Price, DeliveryTime } from "./styles";
 
 interface Props {
   name: string;
@@ -42,8 +42,10 @@ const Product: FC<Props> = ({
             <h3>Omschrijving</h3>
             <p>{description}</p>
             <Box display="flex" flexDirection="column">
-              <span>{properties.deliveryTime[0]}</span>
-              <span>{properties.deliveryCosts[0]}</span>
+              <DeliveryTime>
+                <LocalShipping />
+                {properties.deliveryTime[0]}
+              </DeliveryTime>
               <Button color="secondary">
                 <LocalOffer />
                 {`Bestel met €${properties.discount[0]} korting`}

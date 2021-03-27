@@ -15,4 +15,12 @@ const Price = styled.span`
   font-size: 1.5rem;
 `;
 
-export { FromPrice, Price };
+const DeliveryTime = styled.span`
+  color: ${({ theme }) => theme.palette.grey.veryDark};
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  margin: ${({ theme }) => theme.margins.m} 0;
+`;
+
+export { FromPrice, Price, DeliveryTime };
