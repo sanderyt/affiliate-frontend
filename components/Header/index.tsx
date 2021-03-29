@@ -2,6 +2,7 @@ import React, { FC } from "react";
 
 import { StyledHeader } from "./styles";
 import { Grid } from "@material-ui/core";
+import { Navigation } from "../Navigation";
 
 interface Props {}
 
@@ -16,7 +17,9 @@ export const Header: FC<Props> = ({}) => {
         </Grid>
         <Grid item xs={9}>
           <Grid container justify="center" alignItems="center">
-            Menu
+            <Navigation>
+              <h1>hoi</h1>
+            </Navigation>
           </Grid>
         </Grid>
       </Grid>
