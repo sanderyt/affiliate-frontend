@@ -6,7 +6,11 @@ import { Container, Grid, Box } from "@material-ui/core";
 import { Button } from "../../components/Button";
 import { LocalOffer, LocalShipping } from "@material-ui/icons";
 
-import { FromPrice, Price, DeliveryTime } from "./styles";
+import {
+  FromPrice,
+  Price,
+  DeliveryTime
+} from "../../styles/pages/productStyles";
 
 interface Props {
   name: string;
