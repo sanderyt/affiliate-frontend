@@ -6,4 +6,18 @@ const StyledSidebar = styled.div`
   color: white;
 `;
 
-export { StyledSidebar };
+const SidebarItem = styled.div`
+  background-color: ${({ theme }) => theme.palette.grey.dark};
+  height: 40px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  padding-left: ${({ theme }) => theme.paddings.s};
+  cursor: pointer;
+
+  &:hover {
+    background-color: #aaa;
+  }
+`;
+
+export { StyledSidebar, SidebarItem };
