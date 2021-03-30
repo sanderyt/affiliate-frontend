@@ -1,23 +1,12 @@
 import React from "react";
-import CSVReader from "react-csv-reader";
 
-import { Grid, Box } from "@material-ui/core";
-import { Sidebar } from "../../components/Sidebar";
+import { LayoutAdmin } from "../../components/LayoutAdmin";
 
 const Index = () => {
   return (
-    <Grid container>
-      <Grid item md={2} xs={12}>
-        <Sidebar />
-      </Grid>
-      <Grid item md={10} xs={12}>
-        <Box display="flex" alignItems="center" justifyContent="center">
-          <CSVReader
-            onFileLoaded={(data, fileInfo) => console.dir(data, fileInfo)}
-          />
-        </Box>
-      </Grid>
-    </Grid>
+    <LayoutAdmin>
+      <h1>Welcome in the admin panel</h1>{" "}
+    </LayoutAdmin>
   );
 };
 
