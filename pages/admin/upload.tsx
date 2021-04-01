@@ -21,7 +21,7 @@ const Upload = () => {
         };
       } else {
         setError(true);
-        setErrorMessage("This is not a JSON file");
+        setErrorMessage("This is not a JSON file. Please upload a JSON file.");
       }
     }
   };
