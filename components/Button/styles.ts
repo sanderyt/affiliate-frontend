@@ -7,7 +7,7 @@ const StyledButton = styled(Button)`
     color: white;
     padding: 6px 24px;
     text-transform: none;
-    font-family: "Circular";
+    font-family: "Circular" !important;
     font-size: 1rem;
   }
 `;
