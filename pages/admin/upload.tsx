@@ -17,7 +17,8 @@ const Upload = () => {
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = e => {
           setFiles(e.target.result);
-          const results = e.target.result;
+          const results = JSON.parse(e.target.result);
+          console.log(results, "rsults");
         };
       } else {
         setError(true);
