@@ -33,7 +33,7 @@ export const theme = {
     xl: " 64px",
     xxl: "128px"
   },
-  boxShadow: "0 0 10px #aaa",
+  boxShadow: "0 2px 10px rgba(0,0,0,0.2)",
   borderRadius: {
     s: "1px",
     m: "3px",
