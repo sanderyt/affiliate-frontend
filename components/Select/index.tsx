@@ -15,9 +15,10 @@ interface Props {
         child: React.ReactNode
       ) => void)
     | undefined;
+  options: string[];
 }
 
-export const Select: FC<Props> = ({ value, handleChange, label }) => {
+export const Select: FC<Props> = ({ value, handleChange, label, options }) => {
   return (
     <div>
       <InputLabel>{label}</InputLabel>
@@ -27,9 +28,14 @@ export const Select: FC<Props> = ({ value, handleChange, label }) => {
         value={value}
         onChange={handleChange}
       >
-        <MenuItem value={10}>Ten</MenuItem>
-        <MenuItem value={20}>Twenty</MenuItem>
-        <MenuItem value={30}>Thirty</MenuItem>
+        {options &&
+          options.map(option => {
+            return (
+              <MenuItem value={option} key={option}>
+                {option}
+              </MenuItem>
+            );
+          })}
       </StyledSelect>
     </div>
   );

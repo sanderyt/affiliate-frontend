@@ -1,8 +1,10 @@
 import React, { useState, ChangeEvent } from "react";
-import { LayoutAdmin } from "../../components/LayoutAdmin";
 import { Button, Grid, Snackbar } from "@material-ui/core";
 import { Publish } from "@material-ui/icons";
+
+import { LayoutAdmin } from "../../components/LayoutAdmin";
 import { Select } from "../../components/Select";
+import { getObject } from "../../utils/utils";
 
 const Upload = () => {
   const [files, setFiles] = useState<string | ArrayBuffer | null>(null);
@@ -15,11 +17,14 @@ const Upload = () => {
     const uploadedFile = e.target.files && e.target.files[0];
 
     if (uploadedFile) {
-      if (validateFile(uploadedFile)) {
+      if (validateFile(uploadedFile) && e.target.files) {
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = e => {
           if (e.target) {
             const results = e.target.result && JSON.parse(e.target.result);
+            results.products.map((product: any) => {
+              const keys = getObject(product);
+            });
             setFiles(results);
           }
         };
@@ -69,6 +74,7 @@ const Upload = () => {
               handleChange={handleChangeSelect}
               value={category}
               label="Kies de categorie"
+              options={["dit zijn keys", "en dit ook"]}
             />
           </>
         )}
