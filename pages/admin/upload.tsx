@@ -2,13 +2,15 @@ import React, { useState, ChangeEvent } from "react";
 import { LayoutAdmin } from "../../components/LayoutAdmin";
 import { Button, Grid, Snackbar } from "@material-ui/core";
 import { Publish } from "@material-ui/icons";
+import { Select } from "../../components/Select";
 
 const Upload = () => {
-  const [files, setFiles] = useState(null);
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState(null);
+  const [files, setFiles] = useState<string | ArrayBuffer | null>(null);
+  const [error, setError] = useState<boolean>(false);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [category, setCategory] = useState("");
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeFile = (e: ChangeEvent<HTMLInputElement>) => {
     const fileReader = new FileReader();
     const uploadedFile = e.target.files && e.target.files[0];
 
@@ -16,9 +18,10 @@ const Upload = () => {
       if (validateFile(uploadedFile)) {
         fileReader.readAsText(e.target.files[0], "UTF-8");
         fileReader.onload = e => {
-          setFiles(e.target.result);
-          const results = JSON.parse(e.target.result);
-          console.log(results, "rsults");
+          if (e.target) {
+            const results = e.target.result && JSON.parse(e.target.result);
+            setFiles(results);
+          }
         };
       } else {
         setError(true);
@@ -40,6 +43,10 @@ const Upload = () => {
 
   const handleClose = () => setError(false);
 
+  const handleChangeSelect = (event: any) => {
+    setCategory(event.target.value);
+  };
+
   return (
     <LayoutAdmin>
       <Grid container justify="center" direction="column" alignItems="center">
@@ -50,11 +57,22 @@ const Upload = () => {
           <input
             type="file"
             hidden
-            onChange={handleChange}
+            onChange={handleChangeFile}
             accept="application/JSON"
           />
         </Button>
-        {files && <h1>Files uploaded</h1>}
+
+        {files && (
+          <>
+            <h3>Kies de categorie</h3>
+            <Select
+              handleChange={handleChangeSelect}
+              value={category}
+              label="Kies de categorie"
+            />
+          </>
+        )}
+
         {error && (
           <Snackbar
             open={error}
