@@ -1,24 +1,23 @@
 import React, { FC } from "react";
+import { UseFormRegister } from "react-hook-form";
 
 import { TextfieldWrapper, Label, StyledTextfield } from "./styles";
 
-type RefReturn =
-  | string
-  | ((instance: HTMLInputElement | null) => void)
-  | React.RefObject<HTMLInputElement>
-  | null
-  | undefined;
+interface IFormValues {
+  [key: string]: string;
+}
 
 interface Props {
   label: string;
-  register?: () => RefReturn;
+  register: UseFormRegister<IFormValues>;
+  required: boolean;
 }
 
-export const Textfield: FC<Props> = ({ label, register }) => {
+export const Textfield: FC<Props> = ({ label, required, register }) => {
   return (
     <TextfieldWrapper>
       <Label>{label}</Label>
-      <StyledTextfield type="text" ref={register} name={label} />
+      <StyledTextfield type="text" {...register(label, { required })} />
     </TextfieldWrapper>
   );
 };
