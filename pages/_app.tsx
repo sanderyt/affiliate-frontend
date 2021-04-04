@@ -5,6 +5,8 @@ import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
 import { muiTheme, theme } from "../styles/theme";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { GlobalStyle } from "../styles/globalStyle";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -19,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <MuiThemeProvider theme={muiTheme}>
+          <ToastContainer />
           <CssBaseline />
           <Component {...pageProps} />
         </MuiThemeProvider>
