@@ -6,7 +6,7 @@ const StyledContentBox = styled(Box)`
   box-shadow: ${({ theme }) => theme.boxShadow};
   width: 80%;
   padding: ${({ theme }) => theme.paddings.m};
-  margin: ${({ theme }) => theme.margins.m};
+  margin: ${({ theme }) => theme.margins.l};
   border-radius: ${({ theme }) => theme.borderRadius.m};
 `;
 
