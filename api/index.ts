@@ -3,6 +3,15 @@ import axios from "axios";
 const API_URL = "https://affiliate-backend00.herokuapp.com/api";
 const MENU = "/menu";
 
+async function getMenu() {
+  try {
+    const response = await axios.get(`${API_URL}${MENU}`);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+}
+
 async function postMenu(
   item: string,
   successCallback: Function,
@@ -19,4 +28,4 @@ async function postMenu(
   }
 }
 
-export { postMenu };
+export { getMenu, postMenu };
