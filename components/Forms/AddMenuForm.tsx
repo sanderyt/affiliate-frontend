@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
 
 import AddIcon from "@material-ui/icons/Add";
 
@@ -16,6 +17,7 @@ export const AddMenuForm = () => {
     handleSubmit,
     formState: { errors }
   } = useForm();
+  const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data: any) => {
@@ -30,6 +32,7 @@ export const AddMenuForm = () => {
           draggable: true,
           progress: undefined
         });
+        refreshData();
       },
       (error: string) => {
         toast.error(error, {
@@ -42,6 +45,10 @@ export const AddMenuForm = () => {
         });
       }
     );
+  };
+
+  const refreshData = () => {
+    router.replace(router.asPath);
   };
 
   return (
