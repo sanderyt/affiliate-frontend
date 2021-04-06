@@ -7,6 +7,7 @@ const StyledHeader = styled.header`
   top: 0;
   width: 100%;
   background-color: white;
+  z-index: 3;
 `;
 
 export { StyledHeader };

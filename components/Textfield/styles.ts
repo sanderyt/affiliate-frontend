@@ -4,6 +4,7 @@ const TextfieldWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: ${({ theme }) => theme.margins.s};
+  width: 100%;
 `;
 
 const Label = styled.span`
@@ -19,6 +20,7 @@ const StyledTextfield = styled.input`
   transition: 250ms;
   font-size: 1rem;
   height: 50px;
+  width: 100%;
 
   &:focus {
     border: 1px solid ${({ theme }) => theme.palette.primary};

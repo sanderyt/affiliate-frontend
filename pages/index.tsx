@@ -4,9 +4,11 @@ import { LocalOffer, Store, Check } from "@material-ui/icons";
 
 import { Card } from "../components/Card";
 import { Grid } from "@material-ui/core";
+import { Fold } from "../components/Fold";
 
 const Index = () => (
   <Layout>
+    <Fold />
     <Container fixed>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras lacinia,
