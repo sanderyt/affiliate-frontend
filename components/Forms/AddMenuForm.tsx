@@ -18,7 +18,6 @@ export const AddMenuForm = () => {
     formState: { errors }
   } = useForm();
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data: any) => {
     postMenu(

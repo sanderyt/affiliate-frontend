@@ -18,9 +18,6 @@ const Navigation: FC<Props> = ({ menuItems }) => {
     <LayoutAdmin>
       <Grid container justify="center" direction="column" alignItems="center">
         <h2>Categorieen</h2>
-        {menuItems.length === 0 && (
-          <div>Je hebt nog geen navigatie, voeg je eerste categorie toe.</div>
-        )}
         <ContentBox>
           <AddMenuForm />
         </ContentBox>
@@ -32,10 +29,13 @@ const Navigation: FC<Props> = ({ menuItems }) => {
             alignItems="center"
           >
             <h2>Menu</h2>
-            {menuItems &&
+            {menuItems.length > 0 ? (
               menuItems.map((menuItem: any) => {
                 return <MenuItem name={menuItem.name} slug={menuItem.slug} />;
-              })}
+              })
+            ) : (
+              <span>Je hebt nog geen menu items. Voeg een categorie toe.</span>
+            )}
           </Grid>
         </ContentBox>
       </Grid>

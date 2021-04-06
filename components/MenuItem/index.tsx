@@ -1,4 +1,6 @@
 import React, { FC, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
 
 import { Edit, Delete, Save } from "@material-ui/icons";
 
@@ -8,6 +10,7 @@ import { useForm } from "react-hook-form";
 import { Textfield } from "../Textfield";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
+import { deleteMenu } from "../../api";
 
 interface Props {
   name: string;
@@ -23,6 +26,7 @@ export const MenuItem: FC<Props> = ({ name, slug }) => {
   } = useForm();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const router = useRouter();
 
   const editMenuItem = () => {
     setIsExpanded(!isExpanded);
@@ -37,7 +41,35 @@ export const MenuItem: FC<Props> = ({ name, slug }) => {
   };
 
   const deleteCategory = () => {
-    console.log("category was deleted");
+    deleteMenu(
+      name,
+      () => {
+        toast.success("Het item is verwijderd.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined
+        });
+        refreshData();
+        handleClose();
+      },
+      (error: string) => {
+        toast.success(error, {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          draggable: true,
+          progress: undefined
+        });
+      }
+    );
+  };
+
+  const refreshData = () => {
+    router.replace(router.asPath);
   };
 
   useEffect(() => {

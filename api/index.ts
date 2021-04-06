@@ -28,4 +28,21 @@ async function postMenu(
   }
 }
 
-export { getMenu, postMenu };
+async function deleteMenu(
+  name: string,
+  successCallback: Function,
+  errorCallback: Function
+) {
+  try {
+    await axios.delete(`${API_URL}${MENU}`, {
+      data: {
+        name
+      }
+    });
+    successCallback("Je hebt het menu item toegevoegd");
+  } catch (error) {
+    errorCallback(error);
+  }
+}
+
+export { getMenu, postMenu, deleteMenu };
