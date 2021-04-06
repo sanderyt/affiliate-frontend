@@ -24,7 +24,7 @@ async function postMenu(
     });
     successCallback("Je hebt het menu item toegevoegd");
   } catch (error) {
-    errorCallback(error);
+    errorCallback(error.response.data);
   }
 }
 

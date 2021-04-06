@@ -1,14 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "styled-components";
+import { postMenu } from "../../api";
+
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
+
+import { toast, ToastOptions } from "react-toastify";
 
 import AddIcon from "@material-ui/icons/Add";
 
 import { Textfield } from "../Textfield";
-import { postMenu } from "../../api";
-
-import { toast } from "react-toastify";
 import { Button } from "../Button";
 
 export const AddMenuForm = () => {
@@ -19,29 +20,24 @@ export const AddMenuForm = () => {
   } = useForm();
   const router = useRouter();
 
+  const toasterConfig: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined
+  };
+
   const onSubmit = (data: any) => {
     postMenu(
       data.categorie,
-      (message: string) => {
-        toast.success(message, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined
-        });
+      (successMessage: string) => {
+        toast.success(successMessage, toasterConfig);
         refreshData();
       },
-      (error: string) => {
-        toast.error(error, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined
-        });
+      (errorMessage: string) => {
+        toast.error(errorMessage, toasterConfig);
       }
     );
   };
