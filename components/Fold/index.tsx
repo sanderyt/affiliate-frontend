@@ -9,11 +9,7 @@ import { useForm } from "react-hook-form";
 interface Props {}
 
 export const Fold: FC<Props> = ({}) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
+  const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
     console.log(data);

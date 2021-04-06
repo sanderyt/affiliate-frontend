@@ -18,12 +18,7 @@ interface Props {
 }
 
 export const MenuItem: FC<Props> = ({ name, slug }) => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    setValue
-  } = useForm();
+  const { register, setValue } = useForm();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();

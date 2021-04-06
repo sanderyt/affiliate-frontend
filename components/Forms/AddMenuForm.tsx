@@ -13,11 +13,7 @@ import { Textfield } from "../Textfield";
 import { Button } from "../Button";
 
 export const AddMenuForm = () => {
-  const {
-    register,
-    handleSubmit,
-    formState: { errors }
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const router = useRouter();
 
   const toasterConfig: ToastOptions = {
