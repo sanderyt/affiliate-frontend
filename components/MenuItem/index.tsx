@@ -1,10 +1,11 @@
 import React, { FC, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import { toast } from "react-toastify";
+import { toast, ToastOptions } from "react-toastify";
 
 import { Edit, Delete, Save } from "@material-ui/icons";
 
-import { StyledMenuItem } from "./styles";
+import { StyledMenuItem, OuterDiv } from "./styles";
+
 import { Box } from "@material-ui/core";
 import { useForm } from "react-hook-form";
 import { Textfield } from "../Textfield";
@@ -12,16 +13,35 @@ import { Button } from "../Button";
 import { Modal } from "../Modal";
 import { deleteMenu } from "../../api";
 
-interface Props {
-  name: string;
-  slug: string;
-}
+import { useDrag, useDrop } from "react-sortly";
 
-export const MenuItem: FC<Props> = ({ name, slug }) => {
+// interface Props {
+//   name: string;
+//   slug: string;
+//   depth: number;
+// }
+
+export const MenuItem: FC<{
+  id: number;
+  index: number;
+  depth: number;
+  data: { id: number; name: string; depth: number; slug: string };
+}> = ({ data: { id, name, depth, slug } }) => {
   const { register, setValue } = useForm();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const router = useRouter();
+  const [, drag] = useDrag();
+  const [, drop] = useDrop();
+
+  const toasterConfig: ToastOptions = {
+    position: "top-right",
+    autoClose: 5000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    draggable: true,
+    progress: undefined
+  };
 
   const editMenuItem = () => {
     setIsExpanded(!isExpanded);
@@ -39,26 +59,12 @@ export const MenuItem: FC<Props> = ({ name, slug }) => {
     deleteMenu(
       name,
       () => {
-        toast.success("Het item is verwijderd.", {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined
-        });
+        toast.success("Het item is verwijderd.", toasterConfig);
         refreshData();
         handleClose();
       },
       (error: string) => {
-        toast.success(error, {
-          position: "top-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          draggable: true,
-          progress: undefined
-        });
+        toast.success(error, toasterConfig);
       }
     );
   };
@@ -73,42 +79,51 @@ export const MenuItem: FC<Props> = ({ name, slug }) => {
   }, []);
 
   return (
-    <StyledMenuItem display="flex" alignItems="center" flexDirection="column">
-      <Box display="flex" justifyContent="space-between" width={1}>
-        {name}
-        <div>
-          {isExpanded ? (
-            <Save onClick={editMenuItem} />
-          ) : (
-            <Edit onClick={editMenuItem} />
+    <OuterDiv ref={drop}>
+      <div ref={drag} style={{ marginLeft: depth * 20 }}>
+        <StyledMenuItem
+          display="flex"
+          alignItems="center"
+          flexDirection="column"
+          width={1}
+        >
+          <Box display="flex" justifyContent="space-between" width={1}>
+            {name}
+            <div>
+              {isExpanded ? (
+                <Save onClick={editMenuItem} />
+              ) : (
+                <Edit onClick={editMenuItem} />
+              )}
+              <Delete onClick={handleOpen} />
+            </div>
+          </Box>
+
+          {isExpanded && (
+            <Box width={1}>
+              <form>
+                <Textfield label="name" register={register} required={true} />
+                <Textfield label="slug" register={register} required={true} />
+                <Button color="primary" type="submit">
+                  <Save />
+                </Button>
+              </form>
+            </Box>
           )}
-          <Delete onClick={handleOpen} />
-        </div>
-      </Box>
 
-      {isExpanded && (
-        <Box width={1}>
-          <form>
-            <Textfield label="name" register={register} required={true} />
-            <Textfield label="slug" register={register} required={true} />
-            <Button color="primary" type="submit">
-              <Save />
-            </Button>
-          </form>
-        </Box>
-      )}
-
-      <Modal
-        title="Wil deze categorie verwijderen?"
-        isOpen={isOpen}
-        handleClose={handleClose}
-        primaryButtonText="Verwijderen"
-        secondaryButtonText="Annuleren"
-        primaryAction={deleteCategory}
-      >
-        Door deze categorie te verwijderen, verwijder je ook de desbetreffende
-        producten. Dit kan niet meer ongedaan worden.
-      </Modal>
-    </StyledMenuItem>
+          <Modal
+            title="Wil deze categorie verwijderen?"
+            isOpen={isOpen}
+            handleClose={handleClose}
+            primaryButtonText="Verwijderen"
+            secondaryButtonText="Annuleren"
+            primaryAction={deleteCategory}
+          >
+            Door deze categorie te verwijderen, verwijder je ook de
+            desbetreffende producten. Dit kan niet meer ongedaan worden.
+          </Modal>
+        </StyledMenuItem>
+      </div>
+    </OuterDiv>
   );
 };

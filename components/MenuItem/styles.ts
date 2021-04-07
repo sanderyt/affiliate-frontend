@@ -13,4 +13,8 @@ const StyledMenuItem = styled(Box)`
   cursor: move;
 `;
 
-export { StyledMenuItem };
+const OuterDiv = styled.div`
+  width: 100%;
+`;
+
+export { StyledMenuItem, OuterDiv };

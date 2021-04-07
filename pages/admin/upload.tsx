@@ -4,7 +4,6 @@ import { Publish } from "@material-ui/icons";
 
 import { LayoutAdmin } from "../../components/LayoutAdmin";
 import { Select } from "../../components/Select";
-import { getObject } from "../../utils/utils";
 
 const Upload = () => {
   const [files, setFiles] = useState<string | ArrayBuffer | null>(null);
@@ -22,9 +21,7 @@ const Upload = () => {
         fileReader.onload = e => {
           if (e.target) {
             const results = e.target.result && JSON.parse(e.target.result);
-            results.products.map((product: any) => {
-              const keys = getObject(product);
-            });
+            results.products.map((product: any) => {});
             setFiles(results);
           }
         };

@@ -8,6 +8,10 @@ import { GlobalStyle } from "../styles/globalStyle";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
+import { ContextProvider } from "react-sortly";
+
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
     const jssStyles = document.querySelector("#jss-server-side");
@@ -21,9 +25,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       <GlobalStyle />
       <ThemeProvider theme={theme}>
         <MuiThemeProvider theme={muiTheme}>
-          <ToastContainer />
-          <CssBaseline />
-          <Component {...pageProps} />
+          <DndProvider backend={HTML5Backend}>
+            <ContextProvider>
+              <ToastContainer />
+              <CssBaseline />
+              <Component {...pageProps} />
+            </ContextProvider>
+          </DndProvider>
         </MuiThemeProvider>
       </ThemeProvider>
     </>
