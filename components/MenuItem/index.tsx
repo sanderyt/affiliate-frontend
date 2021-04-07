@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import React, { FC, useState, useEffect, ReactText } from "react";
 import { useRouter } from "next/router";
 import { toast, ToastOptions } from "react-toastify";
 
@@ -22,10 +22,10 @@ import { useDrag, useDrop } from "react-sortly";
 // }
 
 export const MenuItem: FC<{
-  id: number;
+  id: ReactText;
   index: number;
   depth: number;
-  data: { id: number; name: string; depth: number; slug: string };
+  data: { id: ReactText };
 }> = ({ data: { id, name, depth, slug } }) => {
   const { register, setValue } = useForm();
   const [isExpanded, setIsExpanded] = useState(false);

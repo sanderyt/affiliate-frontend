@@ -16,43 +16,11 @@ interface Props {
 }
 
 const Navigation: FC<Props> = ({ menuItems }) => {
-  const [items, setItems] = React.useState([
-    {
-      id: 1,
-      name: "Priscilla Cormier",
-      depth: 0,
-      index: 0,
-      slug: "priscilla-cormier"
-    },
-    {
-      id: 2,
-      name: "Miss Erich Bartoletti",
-      depth: 0,
-      index: 1,
-      slug: "miss-erich-bartoletti"
-    },
-    {
-      id: 3,
-      name: "Alison Friesen",
-      depth: 0,
-      index: 2,
-      slug: "alison-friesen"
-    },
-    {
-      id: 4,
-      name: "Bernita Mayert",
-      depth: 0,
-      index: 3,
-      slug: "bernita-mayert"
-    },
-    {
-      id: 5,
-      name: "Garfield Berge",
-      depth: 0,
-      index: 4,
-      slug: "garfield-berge"
-    }
-  ]);
+  const sanitizeItems = menuItems.map((item: any, index: any) => {
+    return { ...item, id: index };
+  });
+
+  const [items, setItems] = React.useState(sanitizeItems);
 
   const handleChange = (newItems: any) => {
     setItems(newItems);
@@ -80,7 +48,7 @@ const Navigation: FC<Props> = ({ menuItems }) => {
             ) : (
               <span>Je hebt nog geen menu items. Voeg een categorie toe.</span>
             )} */}
-
+            <h2>Menu</h2>
             <Sortly items={items} onChange={handleChange}>
               {props => <MenuItem {...props} />}
             </Sortly>
