@@ -20,8 +20,23 @@ async function postMenu(
   try {
     await axios.post(`${API_URL}${MENU}`, {
       name: item,
-      slug: item
+      slug: item,
+      id: 0,
+      depth: 0
     });
+    successCallback("Je hebt het menu item toegevoegd");
+  } catch (error) {
+    errorCallback(error.response.data);
+  }
+}
+
+async function editMenu(
+  menuItems: any,
+  successCallback: Function,
+  errorCallback: Function
+) {
+  try {
+    await axios.put(`${API_URL}${MENU}`, { menuItems });
     successCallback("Je hebt het menu item toegevoegd");
   } catch (error) {
     errorCallback(error.response.data);
@@ -45,4 +60,4 @@ async function deleteMenu(
   }
 }
 
-export { getMenu, postMenu, deleteMenu };
+export { getMenu, postMenu, deleteMenu, editMenu };

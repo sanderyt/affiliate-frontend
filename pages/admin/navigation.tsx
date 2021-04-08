@@ -1,6 +1,6 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import { GetServerSideProps } from "next";
-import { getMenu } from "../../api";
+import { editMenu, getMenu } from "../../api/menu";
 
 import { Grid } from "@material-ui/core";
 
@@ -16,14 +16,20 @@ interface Props {
 }
 
 const Navigation: FC<Props> = ({ menuItems }) => {
-  const sanitizeItems = menuItems.map((item: any, index: any) => {
-    return { ...item, id: index };
-  });
-
-  const [items, setItems] = React.useState(sanitizeItems);
+  const [items, setItems] = useState(menuItems);
 
   const handleChange = (newItems: any) => {
     setItems(newItems);
+
+    editMenu(
+      newItems,
+      (successMessage: string) => {
+        console.log(successMessage, "success");
+      },
+      (errorMessage: string) => {
+        console.log(errorMessage, "error");
+      }
+    );
   };
 
   return (
@@ -62,7 +68,8 @@ const Navigation: FC<Props> = ({ menuItems }) => {
 export default Navigation;
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const menuItems = await getMenu();
+  const items = await getMenu();
+  const menuItems = items.sort((a, b) => a.id - b.id);
 
   return {
     props: {

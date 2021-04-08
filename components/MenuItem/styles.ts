@@ -5,7 +5,7 @@ const StyledMenuItem = styled(Box)`
   background-color: #f7f7f7;
   width: 80%;
   height: auto;
-  padding: ${({ theme }) => theme.paddings.m};
+  padding: ${({ theme }) => theme.paddings.xs};
   margin: ${({ theme }) => theme.margins.xs};
   color: ${({ theme }) => theme.palette.grey.dark};
   font-weight: bold;

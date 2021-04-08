@@ -11,7 +11,7 @@ import { useForm } from "react-hook-form";
 import { Textfield } from "../Textfield";
 import { Button } from "../Button";
 import { Modal } from "../Modal";
-import { deleteMenu } from "../../api";
+import { deleteMenu } from "../../api/menu";
 
 import { useDrag, useDrop } from "react-sortly";
 
@@ -87,16 +87,21 @@ export const MenuItem: FC<{
           flexDirection="column"
           width={1}
         >
-          <Box display="flex" justifyContent="space-between" width={1}>
+          <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
+            width={1}
+          >
             {name}
-            <div>
+            <Box display="flex">
               {isExpanded ? (
                 <Save onClick={editMenuItem} />
               ) : (
                 <Edit onClick={editMenuItem} />
               )}
               <Delete onClick={handleOpen} />
-            </div>
+            </Box>
           </Box>
 
           {isExpanded && (

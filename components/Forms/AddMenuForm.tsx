@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { postMenu } from "../../api";
+import { postMenu } from "../../api/menu";
 
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/router";
