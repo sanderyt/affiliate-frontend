@@ -1,5 +1,6 @@
 import React, { FC, useState, useEffect, ReactText } from "react";
 import { useRouter } from "next/router";
+import { useRefresh } from "../../hooks/useRefresh";
 import { toast, ToastOptions } from "react-toastify";
 
 import { Edit, Delete, Save } from "@material-ui/icons";
@@ -30,7 +31,7 @@ export const MenuItem: FC<{
   const { register, setValue } = useForm();
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const router = useRouter();
+  const { reloadPage } = useRefresh();
   const [, drag] = useDrag();
   const [, drop] = useDrop();
 
@@ -60,17 +61,13 @@ export const MenuItem: FC<{
       name,
       () => {
         toast.success("Het item is verwijderd.", toasterConfig);
-        refreshData();
         handleClose();
+        reloadPage();
       },
       (error: string) => {
         toast.success(error, toasterConfig);
       }
     );
-  };
-
-  const refreshData = () => {
-    router.replace(router.asPath);
   };
 
   useEffect(() => {

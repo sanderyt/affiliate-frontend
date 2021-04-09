@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { postMenu } from "../../api/menu";
 
 import { useForm } from "react-hook-form";
-import { useRouter } from "next/router";
+import { useRefresh } from "../../hooks/useRefresh";
 
 import { toast, ToastOptions } from "react-toastify";
 
@@ -14,7 +14,7 @@ import { Button } from "../Button";
 
 export const AddMenuForm = () => {
   const { register, handleSubmit } = useForm();
-  const router = useRouter();
+  const { reloadPage } = useRefresh();
 
   const toasterConfig: ToastOptions = {
     position: "top-right",
@@ -30,16 +30,12 @@ export const AddMenuForm = () => {
       data.categorie,
       (successMessage: string) => {
         toast.success(successMessage, toasterConfig);
-        refreshData();
+        reloadPage();
       },
       (errorMessage: string) => {
         toast.error(errorMessage, toasterConfig);
       }
     );
-  };
-
-  const refreshData = () => {
-    router.replace(router.asPath);
   };
 
   return (

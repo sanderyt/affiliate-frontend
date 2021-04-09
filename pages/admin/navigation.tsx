@@ -1,4 +1,5 @@
 import React, { FC, useState } from "react";
+import { useRefresh } from "../../hooks/useRefresh";
 import { GetServerSideProps } from "next";
 import { editMenu, getMenu } from "../../api/menu";
 
@@ -17,14 +18,15 @@ interface Props {
 
 const Navigation: FC<Props> = ({ menuItems }) => {
   const [items, setItems] = useState(menuItems);
+  const { refreshData } = useRefresh();
 
   const handleChange = (newItems: any) => {
     setItems(newItems);
 
     editMenu(
       newItems,
-      (successMessage: string) => {
-        console.log(successMessage, "success");
+      () => {
+        refreshData();
       },
       (errorMessage: string) => {
         console.log(errorMessage, "error");
@@ -46,18 +48,14 @@ const Navigation: FC<Props> = ({ menuItems }) => {
             direction="column"
             alignItems="center"
           >
-            {/* <h2>Menu</h2>
-            {menuItems.length > 0 ? (
-              menuItems.map((menuItem: any) => {
-                return <MenuItem name={menuItem.name} slug={menuItem.slug} />;
-              })
+            <h2>Menu</h2>
+            {items.length > 0 ? (
+              <Sortly items={items} onChange={handleChange}>
+                {props => <MenuItem {...props} />}
+              </Sortly>
             ) : (
               <span>Je hebt nog geen menu items. Voeg een categorie toe.</span>
-            )} */}
-            <h2>Menu</h2>
-            <Sortly items={items} onChange={handleChange}>
-              {props => <MenuItem {...props} />}
-            </Sortly>
+            )}
           </Grid>
         </ContentBox>
       </Grid>

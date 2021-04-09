@@ -21,7 +21,6 @@ async function postMenu(
     await axios.post(`${API_URL}${MENU}`, {
       name: item,
       slug: item,
-      id: 0,
       depth: 0
     });
     successCallback("Je hebt het menu item toegevoegd");
