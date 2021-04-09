@@ -16,11 +16,7 @@ export const Header: FC<Props> = ({}) => {
           </Grid>
         </Grid>
         <Grid item xs={9}>
-          <Grid container justify="center" alignItems="center">
-            <Navigation>
-              <h1>hoi</h1>
-            </Navigation>
-          </Grid>
+          <Navigation />
         </Grid>
       </Grid>
     </StyledHeader>

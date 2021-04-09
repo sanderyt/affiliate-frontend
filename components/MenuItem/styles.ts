@@ -9,6 +9,7 @@ const StyledMenuItem = styled(Box)`
   margin: ${({ theme }) => theme.margins.xs};
   color: ${({ theme }) => theme.palette.grey.dark};
   font-weight: bold;
+  border-radius: ${({ theme }) => theme.borderRadius.m};
   border: 1px solid #ccc;
   cursor: move;
 `;
