@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import Link from "next/link";
 
 import { StyledHeader } from "./styles";
 import { Grid } from "@material-ui/core";
@@ -12,7 +13,9 @@ export const Header: FC<Props> = ({}) => {
       <Grid container>
         <Grid item xs={3}>
           <Grid container justify="center" alignItems="center">
-            <h2>Logo</h2>
+            <Link href="/">
+              <h2>Logo</h2>
+            </Link>
           </Grid>
         </Grid>
         <Grid item xs={9}>
