@@ -24,7 +24,6 @@ function MyApp({ Component, pageProps, menuItems }: AppProps) {
 
   return (
     <>
-      <GlobalStyle />
       <ThemeProvider theme={theme}>
         <MuiThemeProvider theme={muiTheme}>
           <DndProvider backend={HTML5Backend}>
@@ -32,6 +31,7 @@ function MyApp({ Component, pageProps, menuItems }: AppProps) {
               <MenuContext.Provider value={{ menuItems }}>
                 <ToastContainer />
                 <CssBaseline />
+                <GlobalStyle />
                 <Component {...pageProps} />
               </MenuContext.Provider>
             </ContextProvider>
